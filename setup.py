@@ -36,7 +36,7 @@ setup(
     keywords='ftpext, FTP, client, library',
     classifiers=[
         'Intended Audience :: Developers',
-        'Intended Audience :: System Administrators'
+        'Intended Audience :: System Administrators',
         'License :: OSI Approved :: BSD License',
         'Topic :: Internet :: File Transfer Protocol (FTP)',
         'Programming Language :: Python :: 3',
