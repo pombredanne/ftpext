@@ -17,7 +17,7 @@ Features
 * FXP support (CPSV/PSV).
 * Logging and other useful features, have a look yourself.
 * PRET support.
-* XDUPE support.
+* X-DUPE support.
     
 I've made the getter functions thread-safe to make multiple objects
 easier to handle.

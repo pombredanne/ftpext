@@ -9,7 +9,7 @@ import re
 class FTPExt(ftplib.FTP_TLS):
     """Extensions to the 'ftplib' standard library.
     Features include:
-    XDUPE support.
+    X-DUPE support.
     Stat -L directory listing support.
     FXP-support CPSV/PSV.
     Logging and other useful features, have a look yourself.
@@ -57,8 +57,8 @@ class FTPExt(ftplib.FTP_TLS):
 
     @property
     def xdupes(self):
-        """List of dupes, if xdupe is enabled then each time the \
-        server returns an 553 (xdupe) response this variable will be \
+        """List of dupes, if X-DUPE is enabled then each time the \
+        server returns an 553 (X-DUPE) response this variable will be \
         populated with the dupe filenames"""
         with self.lock:
             return self.xdupes
@@ -132,7 +132,7 @@ class FTPExt(ftplib.FTP_TLS):
     # Internal: get dupe filenames from 553 (xdupe) response
     def parse_xdupe(self, resp):
         self._xdupes = []
-        """Contains xdupes from last xdupe response"""
+        """Contains dupes from last X-DUPE response"""
         for d in resp.split('\n'):
             m = re.search('X-DUPE: (.+\.[\w\d]{3,4})', d)
             if m:
@@ -159,13 +159,13 @@ class FTPExt(ftplib.FTP_TLS):
         self.use_pret = False
 
     def enable_xdupe(self):
-        """Enable XDUPE support.
+        """Enable X-DUPE support.
         http://www.smartftp.com/static/Products/SmartFTP/RFC/x-dupe-info.txt"""
         self.voidcmd('SITE XDUPE 3')
         self.use_xdupe = True
 
     def disable_xdupe(self):
-        """Enable XDUPE support.
+        """Enable X-DUPE support.
         http://www.smartftp.com/static/Products/SmartFTP/RFC/x-dupe-info.txt"""
         self.voidcmd('SITE XDUPE 0')
         self.use_xdupe = False
