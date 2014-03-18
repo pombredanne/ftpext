@@ -95,8 +95,6 @@ class FTPExt(ftplib.FTP_TLS):
             with self.lock:
                 self._log = (self._log +
                              ('\n*get* {0}'.format(self._sanitize(line))))
-        with self.lock:
-            self._last_response = self._sanitize(line)
         if not line:
             raise EOFError
         if line[-2:] == ftplib.CRLF:
@@ -108,6 +106,8 @@ class FTPExt(ftplib.FTP_TLS):
     # Internal:  Added xdupe support
     def getresp(self):
         resp = self.getmultiline()
+        with self.lock:
+            self._last_response = self._sanitize(resp)
         if self.debugging:
             print('*resp*', self.sanitize(resp))
         self.lastresp = resp[:3]
