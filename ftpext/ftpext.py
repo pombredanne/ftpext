@@ -44,6 +44,12 @@ class FTPExt(ftplib.FTP_TLS):
             ftplib.FTP.__init__(self, host, user, password)
 
     @property
+    def last_response_code(self):
+        """Get the response code of the the last response"""
+        with self.lock:
+            return self._last_response[:3]
+            
+    @property
     def last_response(self):
         """The last response received from the server."""
         with self.lock:

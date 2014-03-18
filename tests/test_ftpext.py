@@ -73,8 +73,9 @@ class TestFtpext(unittest.TestCase):
     def test_last_com_log(self):
         ftp.pwd()
         self.assertEqual(ftp.last_command, 'PWD')
-        self.assertEqual(ftp.last_response[:3], '257')
-        self.assertIn('257', ftp.log.split('\n')[-1])
+        self.assertEqual(ftp.last_response_code, '257')
+        self.assertIn('257 "/"', ftp.last_response)
+        self.assertIn('257 "/"', ftp.log.split('\n')[-1])
 
     def tearDownModule(self):
         ftp.quit()
