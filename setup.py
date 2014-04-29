@@ -22,7 +22,7 @@ setup(
     description='extensions to the \'ftplib\' module',
     long_description=readme,
     author='Kalle Lindqvist',
-    author_email='',
+    author_email='kalle.lindqvist@mykolab.com',
     url='https://github.com/kalind/ftpext',
     packages=[
         'ftpext',
